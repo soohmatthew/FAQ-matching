@@ -706,7 +706,7 @@ def train_test_model(X = None, y = None, w2v_model = None, functional_words = No
 
     return classifier_model, metrics
 
-def tune_threshold(y_pred, y_val, metric = metrics.f1_score, divs = 25):
+def tune_threshold(y_pred, y_val, metric = metrics.accuracy_score, divs = 25):
     '''
     Gives the best threshold by grid search
     '''
@@ -745,7 +745,7 @@ def get_probabilities(student_answers, reference_answers, questions, w2v_model, 
     y_pred = classifier_model.predict_proba(X)
 
     if y_truth is not None:
-        threshold = tune_threshold(y_pred[:,1], y_truth)
+        threshold = tune_threshold(y_pred, y_truth)
         print(f'Tuned Threshold: {threshold:.2f}')
     
     return X, y_pred
