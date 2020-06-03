@@ -8,9 +8,11 @@ apt install python3-venv -y
 echo "Upgrading Pip"
 pip3 install --upgrade pip -y
 
+cd ..
 echo "Creating Virtual Env"
 python3 -m venv .asag_env
 source .asag_env/bin/activate
+cd gim_asag
 
 echo "Installing Basic Conda Packages"
 pip3 install -r requirements.txt
