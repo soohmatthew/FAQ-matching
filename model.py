@@ -41,7 +41,8 @@ class ASAG(object):
         log_print('Models - Loading Complete', self.logger)
 
     def load_sample_data(self):
-        self.sample_data = F.get_testing_data()
+        self.train_data = F.get_train_data()
+        self.test_data = F.get_test_data()
         self.loaded['sample_data_loaded'] = True
         log_print('Sample Data Loaded', self.logger)
     
@@ -61,19 +62,21 @@ class ASAG(object):
         self.load_sample_data()
         self.train_model()
 
-    def train_model(self):
+    def train_model(self, features_selected = None):
         if not self.loaded['models_loaded'] or not self.loaded['sample_data_loaded']:
             raise Exception('Load Text Models and Sample Data First')
 
-        self.classifier_model, self.sample_data_metrics = F.train_test_model(X = None,
-                                                y = None,
+        self.features_selected = features_selected
+
+        self.classifier_model, self.sample_data_metrics = F.train_test_model(train_data = self.train_data,
+                                                test_data = self.test_data,
                                                 w2v_model = self.word_model,
                                                 functional_words = self.functional_words,
                                                 roberta_model = self.roberta,
                                                 threshold = self.classifier_threshold,
                                                 classifier_model = self.classifier_model if self.classifier_model is not None else None,
-                                                sample_data = self.sample_data,
-                                                random_state = self.random_state
+                                                random_state = self.random_state,
+                                                features_selected = features_selected
                                                 )
         self.loaded['classifier_loaded'] = True
         log_print('Model Trained and Stored', self.logger)
@@ -81,6 +84,6 @@ class ASAG(object):
     def grade(self, student_answers, reference_answers, questions, y_truth = None, answer_features = None):
         if not all(self.loaded.values()):
             raise Exception('Load Text Models, Sample Data and Classifier First')
-        X, y_pred = F.get_probabilities(student_answers, reference_answers, questions, self.word_model, self.functional_words, self.roberta, self.classifier_model, y_truth = y_truth, answer_features = answer_features)
+        X, y_pred = F.get_probabilities(student_answers, reference_answers, questions, self.word_model, self.functional_words, self.roberta, self.classifier_model, y_truth = y_truth, answer_features = answer_features, features_selected = self.features_selected)
         self.answer_features = X
         return y_pred
