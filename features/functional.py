@@ -580,7 +580,7 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
     Questions is a lit of questions
     '''
     # Compute Feature Scores 
-    student_answer_length = deepcopy(len(student_answers))
+    student_answer_length = sum([len(ans) for ans in student_answers])
     f123_lsa_scores = lsa_score(student_answers)
     f456_content_overlap = []
     f7_cs_word2vec = []
