@@ -1,12 +1,12 @@
 #!/bin/sh
 echo "Update Packages"
-apt-get update
-apt-get upgrade
-apt install python3-pip
-apt install python3-venv
+apt-get update -y
+apt-get upgrade -y
+apt install python3-pip -y
+apt install python3-venv -y
 
 echo "Upgrading Pip"
-pip3 install --upgrade pip
+pip3 install --upgrade pip -y
 
 echo "Creating Virtual Env"
 python3 -m venv .asag_env

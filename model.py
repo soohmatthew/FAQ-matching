@@ -58,7 +58,7 @@ class ASAG(object):
         log_print('Loading Complete', self.logger)
     
     def load_train_model(self):
-        self.load_models()
+        self.load_models(word_model = 'word2vec')
         self.load_sample_data()
         self.train_model()
 

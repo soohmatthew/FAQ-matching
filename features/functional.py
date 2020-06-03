@@ -25,7 +25,7 @@ from autocorrect import Speller
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from nltk.corpus import genesis, wordnet_ic, wordnet as wn
+from nltk.corpus import genesis, wordnet as wn
 from nltk.tokenize import RegexpTokenizer
 
 from sklearn.feature_extraction.text import TfidfVectorizer
