@@ -252,7 +252,7 @@ def prepare_doc2vec(answers):
     for i, ans in enumerate(answers):
         tokens = gensim.utils.simple_preprocess(ans)
         document_corpus.append(gensim.models.doc2vec.TaggedDocument(tokens, [i]))
-
+        
     # Train model (set min_count = 1, if you want the model to work with the provided example data set)
     model = gensim.models.Doc2Vec(document_corpus, vector_size = 48, window = 300, min_count = 5, workers = 4, epochs = 40)
     return model.docvecs
@@ -261,7 +261,7 @@ def cosine_sim_d2v(student_answers,reference_answers):
     '''
     Return the cosine similarity for every student answer and that of the reference answer, based on vectors computed from doc2vec model
     '''
-    answers = reduce(lambda x,y: x+y,student_answers)
+    answers = deepcopy(reduce(lambda x,y: x+y,student_answers))
     total_answers = len(answers)
     answers += reference_answers
     matrix = prepare_doc2vec(answers)
@@ -273,7 +273,7 @@ def cosine_sim_d2v(student_answers,reference_answers):
             for i in range(std_ans_idx[idx-1],idx_val):
                 results.append(1 - spatial.distance.cosine(matrix[i], matrix[std_ans_idx[-1]+idx-1]))
     
-    assert len(results) == total_answers
+    assert len(results) == total_answers, 'Less results than student answers provided'
     return results
 
 def average_sentence_length(stud_ans):
@@ -580,6 +580,7 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
     Questions is a lit of questions
     '''
     # Compute Feature Scores 
+    student_answer_length = deepcopy(len(student_answers))
     f123_lsa_scores = lsa_score(student_answers)
     f456_content_overlap = []
     f7_cs_word2vec = []
@@ -656,6 +657,7 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
     ]
 
     features = np.array(features).T
+    assert features.shape[0] == student_answer_length, 'Feature matrix has more rows than number of student answers'
 
     return features
 
