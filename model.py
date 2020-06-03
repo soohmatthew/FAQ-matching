@@ -30,7 +30,7 @@ class ASAG(object):
             self.word_model = F.prepare_word2vec()
         else:
             raise NotImplementedError(f'{word_model} is not implemented')
-        log_print('Models - Word Model Loaded', self.logger)
+        log_print(f'Models - {word_model} Loaded', self.logger)
 
         self.roberta = F.prepare_roberta()
         log_print('Models - RoBERTa Loaded', self.logger)

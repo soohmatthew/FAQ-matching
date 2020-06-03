@@ -229,8 +229,8 @@ def cosine_sim_word2vec(stud_ans,ref_ans, w2vmodel):
         ss1 = stud_ans[i]
         ss2 = ref_ans
         
-        s1 = [token.text for token in nlp(ss1) if not token.is_punct and not token.is_stop]
-        s2 = [token.text for token in nlp(ss2) if not token.is_punct and not token.is_stop]
+        s1 = [token.text for token in nlp(ss1) if not token.is_punct and not token.is_stop and re.fullmatch(r'\s+',token.text) is None]
+        s2 = [token.text for token in nlp(ss2) if not token.is_punct and not token.is_stop and re.fullmatch(r'\s+',token.text) is None]
 
         sim=0
         for i in s1:
@@ -239,7 +239,7 @@ def cosine_sim_word2vec(stud_ans,ref_ans, w2vmodel):
                 maxi = max(maxi,w2vmodel.similarity(i,j))
             sim+=maxi
 
-        length = max(len(tokenizer.tokenize(ss1)), len(tokenizer.tokenize(ss2)))
+        length = max(len(word_tokenize(ss1)), len(word_tokenize(ss2)))
         sim/=length
         nums.append(sim)
     return nums
