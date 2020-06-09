@@ -2,9 +2,7 @@
 # Edit at https://www.gitignore.io/?templates=macos,jupyternotebooks
 
 enwiki_20180420_100d.txt.bz2
-Resource/*
 !Resource/Semeval_Data_XMLtocsv
-!Resource/function_words
 !Resource/semeval2013-Task7-2and3way
 
 ### JupyterNotebooks ###
