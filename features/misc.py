@@ -23,3 +23,5 @@ def nltk_init():
         nltk.data.find('tokenizers/punkt')
     except LookupError:
         nltk.download('punkt')
+
+    nltk.download('averaged_perceptron_tagger')

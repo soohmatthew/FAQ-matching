@@ -1,0 +1,93 @@
+Does opening a brokerage account cost you money? 
+Which brokerage companies are recommended? 
+How do I transfer holdings of assets from one brokerage to another? 
+Step by Phase Guide to Moving Assets to Digital Brokers (IB) Account in ThinkorSwim (ToS)? 
+What is that pass-through fee for American Depository Receipts (ADRs) we need to pay for? 
+I am now opening my IB account, should I opt for cash or margin? 
+How can't I buy the companies listed in Interactive Brokers (IB) in Singapore? 
+Is the lower-commissioned GIM-ToS relationship still in force? 
+Some counters are listed as OTC, and can not be purchased from FSMOne. How are we going to buy those counters?
+I had seen the bid / ask spread surprisingly wide before the market opened. I wonder what you would do in this situation when you see that not many people are buying now and the prices are very far apart? 
+I got $X of capital, how do I start investing? 
+How much cash should I receive, or should I receive 100 per cent? 
+How much of my savings to my portfolio should I bring in? 
+Can I ask small businesses that have illiquid stocks where it's difficult to buy in, what actions should we take? Should Istill attempt to buy or forgo, or simply put it on the watchlist and wait? 
+When do you sell? 
+How and when to balance portfolio? Or do portfolio balance needs to be balanced? 
+If the growth is slowing but it's still a quality and solid company, should we sell a firm? 
+How does one manage one's portfolio? Gaining capital vs. cash flow? 
+Allocation of the portfolio as one generation, or have more dependents? 
+Any cash flow alternatives, because growth companies don't pay dividends? 
+Should we invest with our CPF or SRS, for Singaporeans? 
+Is it better to buy good local businesses that pay a dividend yield of more than 4 percent return or rather leave the CPF and SRS as they are?
+Are micro cap enterprises risky? GIM work primarily targets these smaller businesses. Some businesses would be badly affected according to macroeconomic trend and pattern observed during Black Swan or business recession. The blue chip will be the first to recover, then the mid-cap, last and possibly would not recover will be the microcap. 
+Primary growth factors, and how to spot them early
+How do you spot the right qualities in a competent owner-operator and management? 
+How can technology companies be assessed as difficult to understand? As we move towards digitization, it is through imagination that we understand these businesses, because it is difficult to understand what is behind them. How should we tackle them? 
+How to evaluate the SaaS businesses? 
+How to create confidence after thorough analysis, to invest in a company? Sure we may have done research, but after following the GIM framework, how much more is necessarily enough? 
+After spending time on research, doesn't investment in the business sound wasted? 
+Realized quite a few companies propose offering share / note. Is that really a good thing? My understanding is that they raise capital by profiting from the recent price spike. 
+When are we using the EBIT and when are we using EBITDA? 
+I consider myself confused between RoE and RoIC. When are we running RoE and when are we using RoIC? 
+Should we use GAAP or otherwise than GAAP? 
+What is the meaning of GAAP outcomes vs non-GAAP outcomes? 
+If a company's Overall Equity is negative, is it healthy or not? 
+Why does the GIM framework require that the ratio be at a given level? So, e.g. Operating margin above 8%, net debt / equity < 0.4, etc. 
+For SaaS, the churn rate metric general guideline is less than 5 percent, is this churn rate referring to the churn of customers (subscription churn)? Or is the dollar churn 5 per cent (gross sales churn)? Which one matters more?
+RoE is more important than the Net Income Margin, has been mentioned. Company with a high RoE but low Net Income Margin is still regarded as a good business. Why would that be so? 
+Which percentage do we use to decide whether the company is dilutive with all these share or share-based compensation (SBC) issuances? 
+The price / book (PB) ratio is normally only used for playback of assets. What are some examples of how to play assets?Other valuation ratios are available such as PE / RoTE (Return on Tangible Equity) (= PEG), is this financial metric only relevant to the banking industry? 
+How do I access FTI Community's Teachable Platform? 
+Is there a Teachable App? 
+Why can't I use the Mobile app to access Teachable?
+How does Teachable School account differ from myTeachable account? 
+How can I convert myTeachable account to mySchool account? 
+Where are the earnings dates for the companies listed?
+What tools do you use to receive push notifications / keep info tabs on businesses in your portfolio? So, e.g. Reduce their earnings, etc. 
+What are the various forms provided by businesses and when will we get the details we want like quarterly reporting or insider ownership?
+GIM calculator does not seem fitting for the valuation of the SaaS firms. Is there any other sector not suited for GIM calculator as well? 
+Is there an investment calculator that all businesses should apply for?
+
+Hi, regarding valuation of SAAS company , how do we decide / gauge the price mutiple ? Thank you
+Hi guys, i tried to convert sgd to USD. I top up oly sgd 100 to try it out. But i have some error message. Not sure if im doing it correctly. Could someone advise?
+Hello guys! May i know what's the minimal deposit required for a Interactive broker cash account? Im using FSMone and would like to try out IB.
+Hi, I am trying to understand what is the relation between these term. And I think I need help...what it mean? 1. Float share? 2. Share shorted?
+Hi Kelvin, you mentioned you use EV/recurring profits to value SaaS companies. What exactly do you mean by recurring profits? Because the annual report doesn't have these numbers right?
+What is Fixed Coupon Notes (FCN). It is being offered by DBS bank, is it similar to put option? Is it risky?
+Hi, I was looking through the SAAS Valuation tutorial and wanted to ask how do we determine the last Quarter Growth? Is it Operating Income Growth? And where can we find this statistic? (Assuming I am using Salesforce in this example)
+Hey GIM community, I recently updated my CPFIS account on my DBS Vickers account and plan to invest using my CPF-OA.
+Can I double confirm that if I managed to select Settlement Mode under "CPF", it means that the stock will be paid out through my CPF-OA funds right? As the current situation that confuse me is that under the Account box, it does not show my CPFIS account number but instead, showed the Cash Account Number. Therefore, I do not wish to go into a situation whereby it proceeds to trade using Cash through GIRO just because the account box is not CPFIS account number. Will appreciate any form of help in terms of steps or some pictorial guide? Search high and low over google but couldn't find any proper decent guide on CPF investing though. Thanks!
+Good morning, does anyone have a list of investment-related websites they can share which are bookmarked for daily reading? Also websites which you consider "essentials" as an investor. Thank you very much.
+if my portfolio consist entirely of Saas companies (could be different industries), is this some kind of  'concentration' and can be bad?
+Hello everyone, sorry if the question is answered somewhere. When buying US stocks, we usually need USD. So when using either FSMone or IB, what is the ideal way to exchange SGD to USD in the most cost effective way? Thank you:)
+Hey guys, I could get Morningstar hemacare financial numbers. Anyone knows where else can I get?
+Hi fellow members, when a director exercises his stock option (part of his remuneration), does that dilute the shares in a company? Thanks.
+Hi fellow investors, I recently started to dive a little deeper into other investing terms and am curious about share dilution. How often does share dilution occurs? Should we have an annual share dilution metric when computing instrinic value? Cause for example if a company has an annual share dilution rate of 5%, in 3 years I'm looking at approx 16% loss of my share value. Wouldn't this eat into our rate of returns?
+Has anyone looked into companies eligible for investment using CPF money? Many of the companies we look into aren't listed in SGX and from what I understand that disqualifies them from being used for investment of CPF SA money. Was hoping to put the money to use somewhere better than the regular interest it gets.
+Hi, anyone has any tips on how to get live market prices for free? :slightly_smiling_face: sorry i cheapskate
+How do you evaluate young, lost making, non saas companies?
+I would like to hear your thoughts about the questions that I recently ponder about. When I first join into GIM family and booth camp. I was told that as an investor we need to have the conviction on the company that we vested in. at least to look at 5 years in terms of how they can grow. Hence, I am selective on the company that I picked and will only be looking at them and plan to put in my money when the value is right. However, along my >2 years a few companies that I vested in somehow changed (i.e. hyebeast; JD.com, INS) and I got to change my portfolio and need to find another new company and do the whole thing again. So I then ask myself, is the 5 years and focus on the few companies does work?:thinking_face: Am I suppose to have enough conviction to hold on to it as we know that fundamentally is still good? Or I have to actively research on a new company and pick and choose which can grow faster and change my portfolio accordingly? Don't get me wrong, I still love the information and sharing that I can have from GIM and will continue to be a good student to learn from everyone!:relaxed:
+Hi teachers, I'm studying sketcher, is there any company study I can use it as a guide?
+[Portfolio Mgmt/math qn] Will my average trade price go up, if I trim/cut my % holding in a stock?
+Hi @kelvinsoh, I just finished watching the SaaS Valuation video. In the video, the top 4 companies were used as a benchmark for comparison with ZScaler.  Does this benchmark have to be recalculated for each quarter when making comparison for say eg AYX? Please advise. Thank you.
+Hi, in the tutorial video on INS, Kelvin mentioned that it is possible to lend out stocks to short sellers. Can I ask how to do this in Interactive Brokers?
+Hi, can i check how do we get the cloud gross margin itself since morning star only shows cogs of the entire biz and not cloud segment ? Thank you
+https://www.bloomberg.com/news/articles/2020-05-20/senate-passes-bill-to-delist-chinese-companies-from-exchanges What do you guys think about this? Potentially a black swan for stocks like Baba?
+Hi all, a new GIM student!!! May I seek some guidance from the community on Operating Margin, recently I saw a company with Negative Operating Margin. My question is Fundamentally negative margin is caused by a negative operating profit that means this itself tells me that I should eliminate the company because the company is not even generating profit?
+For ppl who use twitter: Is there a way you  track companies on twitter? Like to automate it instead of having to type in the symbol each time manually?
+For SaaS companies' valuation, I came across different terminology mentioned in different GIM videos. Do we typically use Enterprise Value to Sales (EV/Sales), OR Price to Sales, OR Price/Recurring Profit Margin less the sales and marketing expense, as a measurement metric? TIA!
+Question: do we count lease liabilities as debt? If so, why?
+hi where's the link to join tonight's JD valuation?
+Hi guys, realised quite a few companies are proposing share/note offering (eg. SE, FSLY). What does it really mean haha is this a good thing? My understanding is that they are raising capital by taking advantage of the recent spike in price. Appreciate some help with the understanding 
+Hi, may I ask does anyone received margin cushion notification? I'm using cash account yet received such notification from IB. Anyone experience it before? Thank.
+Hey does anyone have any PDF for Tien Tzou's book : Subscribed? (edited) 
+Hi, I am watching the videos online before attending the bootcamp this weekend. For the section on "Skin in the Game", I can't seem to find shareholders stake in the company on the Market Screener website under "Company". Does anyone know if the website layout has changed?
+Hi, i am trying to find out where did you all get the EV value 6320 for fortinet which i found in Trello GIM calculator. In morningstar the current EV is 20.97 bil
+Hi need help regarding the CAGR calculation. The value for 2018 for this stock was negative, but 2019 and TTM is positive.  Using the GIM calculator, when I input the values, it could not calculate the CAGR as 2018 value is negative. How to I calculate CAGR in such cases?
+From the zoom session on Par just now, I learned that P/S ratio should be between 10 to 15 to consider not expensive. Can I confirm the numbers are correct?
+Which are your top 3 favourite Saas companies?
+Hi i am currently using Standard Chartered to invest in US companies. are there better platforms recommended?
+Hi, i was looking at some of the watchlist webinars on teachable. I'm just wondering, is it considered too late to enter now for stocks like JD/ Par Tech? Thank you.
+Hi guys! Sorry a novice here. Just created FSMone. I believe there is good growth company right now amid this covid19 situation. Mind sharing? 
+@Kelvin Seetoh Hi Kelvin, noticed your write up on Powermatic Data. I'm holding this stock since 2018 and wanted to ask your thoughts on the suspension of their operation in Suzhou; now that the company had announced that they are back in operation and also possibility suspension of operation in Singapore due to CB. I recalled the management also mentioned that they are having difficulty getting parts from their suppliers. How would these events impact their earnings?

@@ -41,12 +41,28 @@ def get_question(event):
         return {'question' : 'NA', 'answer' : 'NA'}
 
 if __name__ == '__main__':
-    event = {'query' : 'What is the meaning of CPF?'}
-    
     nltk_init()
     asag = ASAG()
     asag.load_train_model()
     qc = Question_classifier()
     qc.load_model()
-    if qc.predict(event['query']):
-        print(get_question(event))
+
+    with open('FAQ/test_FAQ.txt', 'r') as file:
+        data = file.read()
+
+    questions = []
+    predicted_question = []
+    predicted_answer = []
+    is_question = []
+    for q in data.split('\n'):
+        questions.append(q)
+        is_question.append(qc.predict(q))
+        response = get_question({'query': q})
+        predicted_question.append(response['question'])
+        predicted_answer.append(response['answer'])
+
+    test_set = pd.DataFrame.from_dict({'questions': questions, 'is_question' : is_question, 'predicted_question' : predicted_question, 'predicted_answer' : predicted_answer})
+
+    ## TO-DO: output confusion matrix
+    test_set.to_csv('test_set_results.csv')
+    print('Saved test set results')

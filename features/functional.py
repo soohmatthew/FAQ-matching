@@ -526,7 +526,10 @@ def chunk_overlap(student_answers,reference_answer, patterns = None):
         for chunk in ref_matches_no:
             if chunk in student_answer:
                 student_overlap += 1
-        results.append(student_overlap/len(ref_matches_no))
+        if len(ref_matches_no) == 0:
+            results.append(0)
+        else:
+            results.append(student_overlap/len(ref_matches_no))
 
     return results
 
@@ -581,10 +584,16 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
     '''
     # Compute Feature Scores 
     student_answer_length = sum([len(ans) for ans in student_answers])
+    
+    time = dt.datetime.now()
     f123_lsa_scores = lsa_score(student_answers)
+    print('LSA Time',dt.datetime.now()-time)
     f456_content_overlap = []
     f7_cs_word2vec = []
+    time = dt.datetime.now()
     f8_cs_doc2vec = cosine_sim_d2v(student_answers, reference_answers) # Build the doc2vec model
+    print('D2V Time',dt.datetime.now()-time)
+    time = dt.datetime.now()
     f9_fsts = []
     f10_roberta_mnli = []
     f11_12_jclc_sim = []
@@ -594,30 +603,30 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
     # Iterate through all rows
     with tqdm(enumerate(zip(student_answers, reference_answers, questions)), desc = 'Generating Features' ,total = len(student_answers)) as iterator:
         for _, (stud_ans, ref_ans, question) in iterator:
-            # time = dt.datetime.now()
+            time = dt.datetime.now()
             f456_content_overlap.append(content_overlap(stud_ans, ref_ans, functional_words, n_grams = [1,2,3]))
-            # print('Word Sent Time',dt.datetime.now()-time)
-            # time = dt.datetime.now()
+            print('Word Sent Time',dt.datetime.now()-time)
+            time = dt.datetime.now()
 
             f7_cs_word2vec.append(cosine_sim_word2vec(stud_ans, ref_ans, w2v_model))
-            # print('W2V cs Time',dt.datetime.now()-time)
-            # time = dt.datetime.now()
+            print('W2V cs Time',dt.datetime.now()-time)
+            time = dt.datetime.now()
 
             f9_fsts.append(okapibm25(stud_ans, ref_ans, w2v_model))
-            # print('TF-IDF Time',dt.datetime.now()-time)
-            # time = dt.datetime.now()
+            print('TF-IDF Time',dt.datetime.now()-time)
+            time = dt.datetime.now()
 
             f10_roberta_mnli.append(mnli_roberta(stud_ans, ref_ans, roberta_model))
-            # print('RoBerTa',dt.datetime.now()-time)
-            # time = dt.datetime.now()
+            print('RoBerTa',dt.datetime.now()-time)
+            time = dt.datetime.now()
 
             f11_12_jclc_sim.append(jclc_sim(stud_ans, ref_ans))
-            # print('JCLC Sim',dt.datetime.now()-time)
-            # time = dt.datetime.now()
+            print('JCLC Sim',dt.datetime.now()-time)
+            time = dt.datetime.now()
 
-            f13_prompt_overlap.append(prompt_overlap(stud_ans, question, functional_words))
-            # print('Prompt Overlap',dt.datetime.now()-time)
-            # time = dt.datetime.now()
+#             f13_prompt_overlap.append(prompt_overlap(stud_ans, question, functional_words))
+#             print('Prompt Overlap',dt.datetime.now()-time)
+#             time = dt.datetime.now()
             f14_chunk_overlap.append(chunk_overlap(stud_ans, ref_ans))
 
     # Post Processing
@@ -651,7 +660,7 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
         # 12 LC sim
         reduce(lambda x,y: x+y,[f[1] for f in f11_12_jclc_sim]),
         # 13 Prompt Overlap
-        reduce(lambda x,y: x+y,f13_prompt_overlap),
+        # reduce(lambda x,y: x+y,f13_prompt_overlap),
         # 13 Chunk Overlap
         reduce(lambda x,y: x+y,f14_chunk_overlap)
     ]
