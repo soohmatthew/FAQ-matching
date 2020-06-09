@@ -31,7 +31,7 @@ from keras.layers import Conv1D, GlobalMaxPooling1D
 from keras.preprocessing.text import Tokenizer
 
 class Question_classifier():
-    def __init__(self, model_name = "model/cnn-classifier", embedding_name = "data/default", pos_tags_flag = True, maxlen = 500):
+    def __init__(self, model_name = "question_classification/model/cnn-classifier", embedding_name = "question_classification/data/default", pos_tags_flag = True, maxlen = 500):
         self.model_name = model_name
         self.embedding_name = embedding_name
         self.load_model_flag = os.path.isfile(self.model_name+".json")

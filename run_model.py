@@ -30,11 +30,11 @@ def outliers_iqr(ys):
     upper_bound = quartile_3 + (iqr * 2)
     return np.where(ys > upper_bound)
 
-def get_question(event):
+def get_question(event, model):
     faq = load_faq()
     questions = [list(faq.keys())]
     query = [event["query"]]
-    one_ans = asag.grade(questions, query, [''], y_truth = None)
+    one_ans = model.grade(questions, query, [''], y_truth = None)
     if len(outliers_iqr(one_ans[:,1])[0]) == 1:
         question = questions[0][outliers_iqr(one_ans[:,1])[0][0]]       
         return {'question' : question, 'answer' : faq[question]}
@@ -48,4 +48,4 @@ if __name__ == '__main__':
     qc = Question_classifier()
     qc.load_model()
     if qc.predict(event['query']):
-        print(get_question(event))
+        print(get_question(event, asag))
