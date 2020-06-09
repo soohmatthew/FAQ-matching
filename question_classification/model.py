@@ -19,9 +19,9 @@ import sys
 import numpy as np
 import keras
 
-from sentence_types import load_encoded_data
-from sentence_types import encode_data, import_embedding, encode_data_for_prediction
-from sentence_types import get_custom_test_comments
+from question_classification.sentence_types import load_encoded_data
+from question_classification.sentence_types import encode_data, import_embedding, encode_data_for_prediction
+from question_classification.sentence_types import get_custom_test_comments
 
 from keras.preprocessing import sequence
 from keras.models import Sequential, model_from_json

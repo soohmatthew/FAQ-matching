@@ -215,8 +215,8 @@ def prepare_roberta():
     Returns a roberta model for textual entailment
     '''
     roberta = torch.hub.load('pytorch/fairseq', 'roberta.large.mnli')
-    if torch.cuda.is_available():
-        roberta.cuda()
+    # if torch.cuda.is_available():
+    #     roberta.cuda()
     roberta.eval()  # disable dropout (or leave in train mode to finetune)
     return roberta
 
