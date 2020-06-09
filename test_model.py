@@ -1,6 +1,7 @@
+from features.misc import nltk_init
+nltk_init()
 from model import ASAG
 from question_classification.model import *
-from features.misc import nltk_init
 
 import os
 import numpy as np
@@ -41,7 +42,6 @@ def get_question(event):
         return {'question' : 'NA', 'answer' : 'NA'}
 
 if __name__ == '__main__':
-    nltk_init()
     asag = ASAG()
     asag.load_train_model()
     qc = Question_classifier()

@@ -15,7 +15,8 @@ enwiki_20180420_100d.txt.bz2
 cc.en.300.bin.gz
 enwiki_20180420_100d.txt
 cc.en.300.bin
-
+__pychache__
+*.pyc
 # IPython
 profile_default/
 ipython_config.py

@@ -1,6 +1,7 @@
+from features.misc import nltk_init
+nltk_init()
 from model import ASAG
 from question_classification.model import *
-from features.misc import nltk_init
 
 import os
 import numpy as np
@@ -42,8 +43,6 @@ def get_question(event):
 
 if __name__ == '__main__':
     event = {'query' : 'What is the meaning of CPF?'}
-    
-    nltk_init()
     asag = ASAG()
     asag.load_train_model()
     qc = Question_classifier()
