@@ -12,6 +12,8 @@ enwiki_20180420_100d.txt.bz2
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 !TestingASAG.ipynb
+cc.en.300.bin.gz
+enwiki_20180420_100d.txt
 
 # IPython
 profile_default/
