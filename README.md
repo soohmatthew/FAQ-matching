@@ -10,5 +10,5 @@
         Test results based on 50 relevant (in FAQ) and 42 irrelevant questions:
         TP = 31; FP = 19; FN = 6; TN = 36
 
-# Installation Guide
+## Installation Guide
 Run the setup.sh file
