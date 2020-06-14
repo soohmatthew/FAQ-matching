@@ -4,6 +4,7 @@
 enwiki_20180420_100d.txt.bz2
 !Resource/Semeval_Data_XMLtocsv
 !Resource/semeval2013-Task7-2and3way
+plots
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks

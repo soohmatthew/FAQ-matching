@@ -8,8 +8,9 @@ class ASAG(object):
                 classifier_model = None,
                 classifier_threshold = 0.5,
                 logger = None,
-                random_state = 1
-                ):
+                random_state = 1,
+                params = {'lsa' : True, 'content_overlap' : True, 'w2v' : True, 'd2v' : True,
+                          'fsts' : True, 'roberta' : True, 'jclc' : True, 'chunk_overlap' : True}):
         self.classifier_threshold = classifier_threshold
         self.logger = logger
         self.classifier_model = classifier_model
@@ -22,6 +23,7 @@ class ASAG(object):
             classifier_loaded = False
         )
         self.random_state = random_state
+        self.params = params
 
     def load_models(self, word_model = 'fasttext'):
         if word_model == 'fasttext':
@@ -76,7 +78,8 @@ class ASAG(object):
                                                 threshold = self.classifier_threshold,
                                                 classifier_model = self.classifier_model if self.classifier_model is not None else None,
                                                 random_state = self.random_state,
-                                                features_selected = features_selected
+                                                features_selected = features_selected,
+                                                params = self.params
                                                 )
         self.loaded['classifier_loaded'] = True
         log_print('Model Trained and Stored', self.logger)
@@ -84,6 +87,6 @@ class ASAG(object):
     def grade(self, student_answers, reference_answers, questions, y_truth = None, answer_features = None):
         if not all(self.loaded.values()):
             raise Exception('Load Text Models, Sample Data and Classifier First')
-        X, y_pred = F.get_probabilities(student_answers, reference_answers, questions, self.word_model, self.functional_words, self.roberta, self.classifier_model, y_truth = y_truth, answer_features = answer_features, features_selected = self.features_selected)
+        X, y_pred = F.get_probabilities(student_answers, reference_answers, questions, self.word_model, self.functional_words, self.roberta, self.classifier_model, y_truth = y_truth, answer_features = answer_features, features_selected = self.features_selected, params = self.params)
         self.answer_features = X
         return y_pred

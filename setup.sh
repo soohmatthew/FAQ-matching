@@ -17,12 +17,6 @@ cd gim_asag
 echo "Installing Basic Conda Packages"
 pip3 install -r requirements.txt
 
-# echo "Installing Gensim"
-# pip install --upgrade gensim
-
-# echo "Installing Torch"
-# pip install torch torchvision
-
 echo "Installing Spacy"
 pip3 install -U spacy
 

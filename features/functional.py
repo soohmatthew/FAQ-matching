@@ -43,6 +43,14 @@ genesis_ic=wn.ic(genesis, False, 0.0)
 spell = Speller()
 nlp = spacy.load('en_core_web_sm')
 neuralcoref.add_to_pipe(nlp)
+params = {'lsa' : True, 
+              'content_overlap' : True,
+              'w2v' : True, 
+              'd2v' : True, 
+              'fsts' : True,
+              'roberta' : True,
+              'jclc' : True,
+              'chunk_overlap' : True}
 
 def word_removal(sentence, character_length = 0):
     words = word_tokenize(sentence)
@@ -576,7 +584,7 @@ def prompt_overlap(student_answers,question, functional_words):
         results.append(overlap_metric)
     return results
 
-def get_features(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model):
+def get_features(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model, params = params):
     '''
     Student answers should be a list of list of answers for each question
     Reference answers should be a list of answers, 1 answer per question
@@ -585,15 +593,12 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
     # Compute Feature Scores 
     student_answer_length = sum([len(ans) for ans in student_answers])
     
-    time = dt.datetime.now()
-    f123_lsa_scores = lsa_score(student_answers)
-    print('LSA Time',dt.datetime.now()-time)
+    if params['lsa']:
+        f123_lsa_scores = lsa_score(student_answers)
     f456_content_overlap = []
     f7_cs_word2vec = []
-    time = dt.datetime.now()
-    f8_cs_doc2vec = cosine_sim_d2v(student_answers, reference_answers) # Build the doc2vec model
-    print('D2V Time',dt.datetime.now()-time)
-    time = dt.datetime.now()
+    if params['d2v']:
+        f8_cs_doc2vec = cosine_sim_d2v(student_answers, reference_answers) # Build the doc2vec model
     f9_fsts = []
     f10_roberta_mnli = []
     f11_12_jclc_sim = []
@@ -603,74 +608,76 @@ def get_features(student_answers, reference_answers, questions, w2v_model, funct
     # Iterate through all rows
     with tqdm(enumerate(zip(student_answers, reference_answers, questions)), desc = 'Generating Features' ,total = len(student_answers)) as iterator:
         for _, (stud_ans, ref_ans, question) in iterator:
-            time = dt.datetime.now()
-            f456_content_overlap.append(content_overlap(stud_ans, ref_ans, functional_words, n_grams = [1,2,3]))
-            print('Word Sent Time',dt.datetime.now()-time)
-            time = dt.datetime.now()
+            if params['content_overlap']:
+                f456_content_overlap.append(content_overlap(stud_ans, ref_ans, functional_words, n_grams = [1,2,3]))
+            
+            if params['w2v']:
+                f7_cs_word2vec.append(cosine_sim_word2vec(stud_ans, ref_ans, w2v_model))
+            
+            if params['fsts']:
+                f9_fsts.append(okapibm25(stud_ans, ref_ans, w2v_model))
+            
+            if params['roberta']:
+                f10_roberta_mnli.append(mnli_roberta(stud_ans, ref_ans, roberta_model))
+            
+            if params['jclc']:
+                f11_12_jclc_sim.append(jclc_sim(stud_ans, ref_ans))
 
-            f7_cs_word2vec.append(cosine_sim_word2vec(stud_ans, ref_ans, w2v_model))
-            print('W2V cs Time',dt.datetime.now()-time)
-            time = dt.datetime.now()
-
-            f9_fsts.append(okapibm25(stud_ans, ref_ans, w2v_model))
-            print('TF-IDF Time',dt.datetime.now()-time)
-            time = dt.datetime.now()
-
-            f10_roberta_mnli.append(mnli_roberta(stud_ans, ref_ans, roberta_model))
-            print('RoBerTa',dt.datetime.now()-time)
-            time = dt.datetime.now()
-
-            f11_12_jclc_sim.append(jclc_sim(stud_ans, ref_ans))
-            print('JCLC Sim',dt.datetime.now()-time)
-            time = dt.datetime.now()
-
-#             f13_prompt_overlap.append(prompt_overlap(stud_ans, question, functional_words))
-#             print('Prompt Overlap',dt.datetime.now()-time)
-#             time = dt.datetime.now()
-            f14_chunk_overlap.append(chunk_overlap(stud_ans, ref_ans))
+            if params['chunk_overlap']:
+                f14_chunk_overlap.append(chunk_overlap(stud_ans, ref_ans))
 
     # Post Processing
-    f123_lsa_scores = np.array(f123_lsa_scores).T.tolist()
-    f10_roberta_mnli = np.concatenate([np.array(f) for f in f10_roberta_mnli]).T.tolist()
+    if params['lsa']:
+        f123_lsa_scores = np.array(f123_lsa_scores).T.tolist()
+    if params['roberta']:
+        f10_roberta_mnli = np.concatenate([np.array(f) for f in f10_roberta_mnli]).T.tolist()
     
-    features = [
-        # 1-3. LSA Components 1,2,3
-        f123_lsa_scores[0],
-        f123_lsa_scores[1],
-        f123_lsa_scores[2],
-        # 4. Unigram Overlap
-        reduce(lambda x,y: x+y,[f[0] for f in f456_content_overlap]),
-        # 5. Bigram Overlap
-        reduce(lambda x,y: x+y,[f[1] for f in f456_content_overlap]),
-        # 6. Trigram overlap
-        reduce(lambda x,y: x+y,[f[2] for f in f456_content_overlap]),
+    features = []
 
-        # 6. Word 2 Vec Cosine Similarity
-        reduce(lambda x,y: x+y,f7_cs_word2vec),
-        # 7. Doc 2 Vec Cosine Similarity
-        f8_cs_doc2vec,
+    # 1-3. LSA Components 1,2,3
+    if params['lsa']:
+        features.append(f123_lsa_scores[0])
+        features.append(f123_lsa_scores[1])
+        features.append(f123_lsa_scores[2])
+    if params['content_overlap']:
+        # 4. Unigram Overlap
+        features.append(reduce(lambda x,y: x+y,[f[0] for f in f456_content_overlap]))
+        # 5. Bigram Overlap
+        features.append(reduce(lambda x,y: x+y,[f[1] for f in f456_content_overlap]))
+        # 6. Trigram overlap
+        features.append(reduce(lambda x,y: x+y,[f[2] for f in f456_content_overlap]))
+
+    # 6. Word 2 Vec Cosine Similarity
+    if params['w2v']:
+        features.append(reduce(lambda x,y: x+y,f7_cs_word2vec))
+
+    # 7. Doc 2 Vec Cosine Similarity
+    if params['d2v']:
+        features.append(f8_cs_doc2vec)
         # 8. TF-IF Scores
-        reduce(lambda x,y: x+y,f9_fsts),
+    if params['fsts']:
+        features.append(reduce(lambda x,y: x+y,f9_fsts))
         # 10 RoBerTa
-        f10_roberta_mnli[0],
-        f10_roberta_mnli[1],
-        f10_roberta_mnli[2],
+    if params['roberta']:
+        features.append(f10_roberta_mnli[0])
+        features.append(f10_roberta_mnli[1])
+        features.append(f10_roberta_mnli[2])
         # 11 JC sim
-        reduce(lambda x,y: x+y,[f[0] for f in f11_12_jclc_sim]),
+    if params['jclc']:
+        features.append(reduce(lambda x,y: x+y,[f[0] for f in f11_12_jclc_sim]))
         # 12 LC sim
-        reduce(lambda x,y: x+y,[f[1] for f in f11_12_jclc_sim]),
-        # 13 Prompt Overlap
-        # reduce(lambda x,y: x+y,f13_prompt_overlap),
+        features.append(reduce(lambda x,y: x+y,[f[1] for f in f11_12_jclc_sim]))
+
         # 13 Chunk Overlap
-        reduce(lambda x,y: x+y,f14_chunk_overlap)
-    ]
+    if params['chunk_overlap']:
+        features.append(reduce(lambda x,y: x+y,f14_chunk_overlap))
 
     features = np.array(features).T
     assert features.shape[0] == student_answer_length, 'Feature matrix has more rows than number of student answers'
 
     return features
 
-def get_features_test_data(w2v_model, functional_words, roberta_model, sample_data = None, save_path = os.path.join(os.getcwd(),'Resource')):
+def get_features_test_data(w2v_model, functional_words, roberta_model, sample_data = None, save_path = os.path.join(os.getcwd(),'Resource'),params = params):
     '''
     Returns the feature matrix from the test data
     '''
@@ -680,7 +687,7 @@ def get_features_test_data(w2v_model, functional_words, roberta_model, sample_da
         student_answers, reference_answers, questions, total_responses, accuracy = sample_data
     accuracy = np.array(reduce(lambda x,y: x+y,accuracy))
     
-    features = get_features(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model)
+    features = get_features(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model, params = params)
 
     assert features.shape[0] == accuracy.shape[0], 'Feature Matrix and Y values do not have the same number of rows'
     # Save Feature
@@ -706,7 +713,7 @@ def load_classifier(classifier_path = os.path.join(os.getcwd(),'Resource','class
     classifier_model = pickle.load(open(classifier_path, 'rb'))
     return classifier_model
 
-def train_test_model(train_data, test_data, w2v_model = None, functional_words = None, roberta_model = None, classifier_model = None, save_path = os.path.join(os.getcwd(),'Resource'), tune_threshold_flag = True, threshold = 0.35, random_state = 1, features_selected = None):
+def train_test_model(train_data, test_data, w2v_model = None, functional_words = None, roberta_model = None, classifier_model = None, save_path = os.path.join(os.getcwd(),'Resource'), tune_threshold_flag = True, threshold = 0.35, random_state = 1, features_selected = None, params = params):
     '''
     Trains the classifier model based on the train and test data
     '''
@@ -723,7 +730,7 @@ def train_test_model(train_data, test_data, w2v_model = None, functional_words =
         if w2v_model is None or functional_words is None or roberta_model is None:
             raise Exception('You have to provide the necessary models to generate the features')
 
-        X_train, y_train = get_features_test_data(w2v_model, functional_words, roberta_model, sample_data = train_data)
+        X_train, y_train = get_features_test_data(w2v_model, functional_words, roberta_model, sample_data = train_data, params = params)
 
         # Save all features
         np.save(os.path.join(save_path,'X_train.npy'), X_train)
@@ -749,7 +756,7 @@ def train_test_model(train_data, test_data, w2v_model = None, functional_words =
         if w2v_model is None or functional_words is None or roberta_model is None:
             raise Exception('You have to provide the necessary models to generate the features')
 
-        X_test, y_test = get_features_test_data(w2v_model, functional_words, roberta_model, sample_data = test_data)
+        X_test, y_test = get_features_test_data(w2v_model, functional_words, roberta_model, sample_data = test_data, params = params)
 
         # Save all features
         np.save(os.path.join(save_path,'X_test.npy'), X_test)
@@ -858,7 +865,7 @@ def plot_roc(ys, save_path = os.path.join(os.getcwd(),'plots')):
     plt.show()
     plt.close()
 
-def get_probabilities(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model, classifier_model, y_truth = None, answer_features = None, features_selected = None, save_path = os.path.join(os.getcwd(),'Resource')):
+def get_probabilities(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model, classifier_model, y_truth = None, answer_features = None, features_selected = None, save_path = os.path.join(os.getcwd(),'Resource'), params = params):
     '''
     Feed in GIM student answers, reference answers, questions and models to get the probability of a correct score
     '''
@@ -873,7 +880,7 @@ def get_probabilities(student_answers, reference_answers, questions, w2v_model, 
         questions[idx] = spell(questions[idx].lower())
 
     if answer_features is None:
-        X = get_features(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model)
+        X = get_features(student_answers, reference_answers, questions, w2v_model, functional_words, roberta_model, params = params)
     else:
         X = answer_features
 
