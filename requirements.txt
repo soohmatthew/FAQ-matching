@@ -26,7 +26,7 @@ nltk==3.5
 numpy==1.18.4
 packaging==20.4
 pandas==1.0.4
-Pillow==7.1.2
+Pillow==9.0.0
 plac==0.9.6
 pluggy==0.13.1
 preshed==3.0.2
